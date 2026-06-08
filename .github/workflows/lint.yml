@@ -1,0 +1,36 @@
+name: lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  frontmatter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate SKILL.md frontmatter
+        run: |
+          set -euo pipefail
+          file=SKILL.md
+          test -f "$file" || { echo "::error::$file is missing"; exit 1; }
+
+          # Frontmatter must be a YAML block delimited by --- on the first line
+          # and closed by a later ---.
+          head -n1 "$file" | grep -qx -- '---' \
+            || { echo "::error::$file must start with a '---' frontmatter fence"; exit 1; }
+          fm=$(awk 'NR==1{next} /^---[[:space:]]*$/{exit} {print}' "$file")
+          [ -n "$fm" ] || { echo "::error::$file has no closing '---' frontmatter fence"; exit 1; }
+
+          # Required keys.
+          for key in name description; do
+            printf '%s\n' "$fm" | grep -Eq "^$key:" \
+              || { echo "::error::frontmatter is missing required key: $key"; exit 1; }
+          done
+
+          # The skill name must match this directory's slug (chifu-dep-guard).
+          name=$(printf '%s\n' "$fm" | grep -E '^name:' | head -n1 | sed 's/^name:[[:space:]]*//')
+          [ "$name" = "chifu-dep-guard" ] \
+            || { echo "::error::name is '$name', expected 'chifu-dep-guard'"; exit 1; }
+
+          echo "SKILL.md frontmatter OK (name=$name)"
