@@ -16,9 +16,9 @@ This skill drives the **`chifu` CLI** — install it first (it works with no
 account; a key just syncs results to your dashboard):
 
 ```bash
-bunx @mfinikov/chifu check          # zero-install, run in any project
+bunx @marshell/chifu check          # zero-install, run in any project
 # or install globally:
-npm i -g @mfinikov/chifu
+npm i -g @marshell/chifu
 ```
 
 ## Install
@@ -29,7 +29,7 @@ The [`chifu-wizard`](../chifu-wizard) installs the CLI and drops this skill into
 the right place for your agent automatically:
 
 ```bash
-bunx @mfinikov/chifu-wizard
+bunx @marshell/chifu-wizard
 ```
 
 ### Manual — Claude Code
