@@ -3,9 +3,10 @@ name: chifu-dep-guard
 description: >-
   Check the project's dependencies for known security vulnerabilities (CVEs) and
   fix them. Use this whenever you add, install, upgrade, pin, or change a
-  dependency (e.g. editing package.json, running npm/bun/yarn install), and
-  before opening a pull request or finishing a task that touched dependencies.
-  Also use when the user asks to audit, check, or secure dependencies.
+  dependency (e.g. editing package.json, running npm/bun/yarn install),
+  ALWAYS right before you run `git commit`, before opening a pull request, and
+  before finishing a task that touched dependencies. Also use when the user asks
+  to audit, check, or secure dependencies.
 ---
 
 # chifu dep-guard
@@ -13,6 +14,11 @@ description: >-
 You introduced or changed dependencies. Before you consider the work done, make
 sure none of them have known vulnerabilities — and fix the ones that do. The
 `chifu` CLI does the detection; **you** do the fixing.
+
+**Run `chifu check` before every `git commit`.** A vulnerable dependency that
+gets committed ends up in production — so catch and fix it *before* the commit,
+never after. If you're about to commit and there are unfixed vulnerable
+packages, fix them first (or tell the user why you can't) and only then commit.
 
 ## Steps
 
