@@ -16,9 +16,9 @@ This skill drives the **`chifu` CLI** — install it first (it works with no
 account; a key just syncs results to your dashboard):
 
 ```bash
-bunx @marshell/chifu check          # zero-install, run in any project
+bunx @marshell/chifu@latest check          # zero-install, run in any project
 # or install globally:
-npm i -g @marshell/chifu
+npm i -g @marshell/chifu@latest
 ```
 
 ## Install
