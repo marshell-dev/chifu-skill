@@ -6,9 +6,11 @@ keeps your dependencies free of known vulnerabilities **in the coding loop** —
 not in a separate Dependabot PR you deal with weeks later.
 
 When your agent touches dependencies, this skill has it run the
-[`chifu`](../chifu-cli) CLI to find vulnerable packages, then upgrade them and
-fix the resulting breaking changes before the work is considered done. The CLI
-only detects; the agent fixes.
+[`chifu`](../chifu-cli) CLI to find vulnerable packages and **report them to
+you** — the recommended upgrade for each, most-severe first — so you stay aware
+of what entered your tree. The agent never edits dependency versions or runs
+installs itself; detecting and surfacing the risk is its job, and applying the
+fix in your own environment is yours.
 
 ## Requirements
 
@@ -74,10 +76,12 @@ the same file works in both clients.
 
 ## What it does
 
-The agent runs `chifu check --json`, reads the rolled-up `packages` list,
-upgrades each vulnerable dependency to its `recommendedVersion`, fixes any
-breaking changes using the per-CVE `advisoryUrl` in `findings`, and re-runs
-until clean.
+The agent runs `chifu check --json`, reads the rolled-up `packages` list, and
+reports each vulnerable dependency — its installed version, the
+`recommendedVersion` that clears its CVEs, the severity, and the per-CVE
+`advisoryUrl` from `findings` — most-severe first. It never edits versions,
+lockfiles, or `overrides`, and never runs an install. You apply the recommended
+change in your own environment and can re-run the skill to confirm it's clean.
 
 ## License
 
