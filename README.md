@@ -6,15 +6,16 @@ keeps your dependencies free of known CVEs **in the coding loop** — before you
 commit, push, or ship.
 
 The agent runs [`chifu`](../chifu-cli), reads `vulnerablePackages` from
-`chifu check --json`, fixes issues by editing `package.json` (and lockfile-only
-re-resolve), and loops until clean. It also defines the **chifu step** inside
-**`/bcp`** (Build → Chifu → Push).
+`chifu check --json`, fixes issues by editing the detected ecosystem's manifest
+(and lockfile when needed), and loops until clean. It also defines the **chifu
+step** inside **`/bcp`** (Build → Chifu → Push).
 
 ## What it does
 
 - **Gate** every `git commit`, `git push`, PR, and dependency change
-- **Fix loop** — bump direct deps, add `overrides` / `resolutions` for transitives
-- **`/bcp`** — after `bun run build`, run chifu; only then commit and push
+- **8 ecosystems** — npm, PyPI, Maven, Go, NuGet, crates.io, Packagist, RubyGems
+- **Fix loop** — bump direct deps; npm transitives via `overrides` / `resolutions`
+- **`/bcp`** — after project build, run chifu; only then commit and push
 - **Never install** except `npm install --package-lock-only --ignore-scripts`
 
 See [SKILL.md](./SKILL.md) for the full agent workflow.
