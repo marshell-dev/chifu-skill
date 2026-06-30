@@ -52,7 +52,7 @@ resolved deps). Supported:
 
 | Ecosystem | Manifests / lockfiles |
 |-----------|------------------------|
-| **npm** | `package-lock.json`, `package.json`, `node_modules` |
+| **npm** | `package-lock.json`, `npm-shrinkwrap.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lock`, `package.json`, `node_modules` |
 | **PyPI** | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `uv.lock`, `pylock.toml`, `pyproject.toml` |
 | **Maven** | `pom.xml`, `build.gradle`, `build.gradle.kts`, Gradle lockfiles |
 | **Go** | `go.mod`, `go.sum` |
